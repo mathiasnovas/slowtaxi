@@ -7,6 +7,7 @@ import { PortableText } from "@portabletext/react";
 import { getPost, getPostSlugs } from "@/sanity/queries";
 import { urlFor } from "@/sanity/image";
 import { CodeBlock } from "../../../(blog)/components/code-block";
+import { SectionTitle } from "../../../(blog)/components/section-title";
 import type { Metadata } from "next";
 
 function formatDate(dateString: string) {
@@ -85,6 +86,11 @@ const portableTextComponents = {
       />
     ),
   },
+  block: {
+    h2: ({ children }: { children?: React.ReactNode }) => (
+      <SectionTitle>{children}</SectionTitle>
+    ),
+  },
 };
 
 export default async function BlogPostPage(
@@ -132,16 +138,11 @@ export default async function BlogPostPage(
           {formatDate(post.date)}
         </time>
         <h1
-          className="text-lg leading-snug mb-3 font-bold"
+          className="text-2xl leading-snug mb-3 font-bold max-w-[50%]"
           style={{ fontFamily: "var(--font-mono)" }}
         >
           {post.title}
         </h1>
-        {post.excerpt && (
-          <p className="text-base text-taxi-dark/50 leading-relaxed">
-            {post.excerpt}
-          </p>
-        )}
       </header>
 
       {post.coverImage && (

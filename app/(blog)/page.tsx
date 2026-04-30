@@ -19,7 +19,7 @@ export default async function HomePage() {
     <div>
       <section className="mb-12">
         <h1
-          className="text-lg mb-2 text-taxi-dark font-bold"
+          className="text-2xl mb-2 text-taxi-dark font-bold max-w-[50%]"
           style={{ fontFamily: "var(--font-mono)" }}
         >
           taking the long route through cyberspace

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { getAbout } from "@/sanity/queries";
 import { urlFor } from "@/sanity/image";
 import { CodeBlock } from "../components/code-block";
+import { SectionTitle } from "../components/section-title";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -45,6 +46,11 @@ const portableTextComponents = {
       />
     ),
   },
+  block: {
+    h2: ({ children }: { children?: React.ReactNode }) => (
+      <SectionTitle>{children}</SectionTitle>
+    ),
+  },
 };
 
 export default async function AboutPage() {
@@ -61,7 +67,7 @@ export default async function AboutPage() {
       </Link>
 
       <h1
-        className="text-lg leading-snug mb-8 font-bold"
+        className="text-2xl leading-snug mb-8 font-bold max-w-[50%]"
         style={{ fontFamily: "var(--font-mono)" }}
       >
         About
