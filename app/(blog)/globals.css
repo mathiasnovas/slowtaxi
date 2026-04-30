@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-taxi-yellow: #ffd600;
+  --color-taxi-dark: #1a1a1a;
+  --color-taxi-gray: #2a2a2a;
+  --color-taxi-orange: #ff9100;
+  --color-taxi-check-dark: #1a1a1a;
+  --color-taxi-check-light: #ffffff;
+}
+
+.checkered-sm {
+  background: repeating-conic-gradient(
+    var(--color-taxi-check-dark) 0% 25%,
+    var(--color-taxi-check-light) 0% 50%
+  ) 0 0 / 8px 8px;
+  min-height: 8px;
+}
+
+body {
+  background: #fafaf8;
+  color: var(--color-taxi-dark);
+}
+
+::selection {
+  background: var(--color-taxi-yellow);
+  color: var(--color-taxi-dark);
+}
+
+/* Prose-like styling for portable text */
+.post-body > * + * {
+  margin-top: 1.5em;
+}
+
+.post-body p {
+  line-height: 1.8;
+}
+
+.post-body h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 2em;
+}
+
+.post-body h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1.5em;
+}
+
+.post-body ul,
+.post-body ol {
+  padding-left: 1.5em;
+}
+
+.post-body li {
+  margin-top: 0.5em;
+}
+
+.post-body blockquote {
+  border-left: 3px solid var(--color-taxi-yellow);
+  padding-left: 1em;
+  font-style: italic;
+  color: #666;
+}
+
+.post-body a {
+  color: var(--color-taxi-dark);
+  text-decoration: underline;
+  text-decoration-color: var(--color-taxi-yellow);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
+}
+
+.post-body code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: #f3f3f3;
+  padding: 0.15em 0.35em;
+}
+
+.post-body pre code {
+  background: none;
+  padding: 0;
+}
+
+.post-body img {
+  max-width: 100%;
+}
