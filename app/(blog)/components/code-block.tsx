@@ -1,5 +1,10 @@
-import { codeToHtml } from "shiki";
+import { createHighlighter } from "shiki";
 import { CopyButton } from "./copy-button";
+
+const highlighter = createHighlighter({
+  themes: ["github-dark"],
+  langs: ["javascript", "typescript", "html", "css", "json", "bash", "markdown", "tsx", "jsx"],
+});
 
 export async function CodeBlock({
   code,
@@ -11,7 +16,14 @@ export async function CodeBlock({
   filename?: string;
 }) {
   const lang = language || "text";
-  const html = await codeToHtml(code, {
+  const h = await highlighter;
+
+  const loadedLangs = h.getLoadedLanguages();
+  if (lang !== "text" && !loadedLangs.includes(lang)) {
+    await h.loadLanguage(lang as Parameters<typeof h.loadLanguage>[0]);
+  }
+
+  const html = h.codeToHtml(code, {
     lang,
     theme: "github-dark",
   });

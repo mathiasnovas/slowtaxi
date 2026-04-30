@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm add:*)",
+      "Bash(mkdir -p \"app/\\(studio\\)/studio/[[...tool]]\")",
+      "Bash(mkdir -p \"app/\\(blog\\)/blog/[slug]\")",
+      "Bash(npx tsc:*)",
+      "Bash(gh repo:*)",
+      "Bash(git remote:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
+    ]
+  }
+}
