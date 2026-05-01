@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getPostSlugs } from "@/sanity/queries";
+import { getPostSlugs, getTagSlugs } from "@/sanity/queries";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl =
@@ -12,6 +12,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: "weekly",
   }));
 
+  const tags = await getTagSlugs();
+
+  const tagEntries: MetadataRoute.Sitemap = tags.map((tag) => ({
+    url: `${baseUrl}/topic/${tag.slug.current}`,
+    changeFrequency: "weekly",
+  }));
+
   return [
     {
       url: baseUrl,
@@ -19,5 +26,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1,
     },
     ...postEntries,
+    ...tagEntries,
   ];
 }

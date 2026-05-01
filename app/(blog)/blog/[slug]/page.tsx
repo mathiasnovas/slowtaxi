@@ -1,14 +1,14 @@
 export const revalidate = 3600;
 
-import { notFound } from "next/navigation";
-import Link from "next/link";
-import Image from "next/image";
 import { PortableText } from "@portabletext/react";
-import { getPost, getPostSlugs } from "@/sanity/queries";
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 import { urlFor } from "@/sanity/image";
+import { getPost } from "@/sanity/queries";
 import { CodeBlock } from "../../../(blog)/components/code-block";
 import { SectionTitle } from "../../../(blog)/components/section-title";
-import type { Metadata } from "next";
 
 function formatDate(dateString: string) {
   return new Date(dateString).toLocaleDateString("en-US", {
@@ -18,13 +18,12 @@ function formatDate(dateString: string) {
   });
 }
 
-export async function generateStaticParams() {
-  const slugs = await getPostSlugs();
-  return slugs.map((s) => ({ slug: s.slug.current }));
+export function generateStaticParams() {
+  return [];
 }
 
 export async function generateMetadata(
-  props: PageProps<"/blog/[slug]">
+  props: PageProps<"/blog/[slug]">,
 ): Promise<Metadata> {
   const { slug } = await props.params;
   const post = await getPost(slug);
@@ -93,9 +92,7 @@ const portableTextComponents = {
   },
 };
 
-export default async function BlogPostPage(
-  props: PageProps<"/blog/[slug]">
-) {
+export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
   const { slug } = await props.params;
   const post = await getPost(slug);
 
@@ -140,7 +137,13 @@ export default async function BlogPostPage(
             <>
               <span>·</span>
               {post.tags.map((tag) => (
-                <span key={tag.slug.current}>#{tag.title}</span>
+                <Link
+                  key={tag.slug.current}
+                  href={`/topic/${tag.slug.current}`}
+                  className="hover:text-taxi-dark transition-colors"
+                >
+                  #{tag.title}
+                </Link>
               ))}
             </>
           )}
@@ -166,13 +169,9 @@ export default async function BlogPostPage(
 
       {post.body && (
         <div className="post-body text-base leading-relaxed">
-          <PortableText
-            value={post.body}
-            components={portableTextComponents}
-          />
+          <PortableText value={post.body} components={portableTextComponents} />
         </div>
       )}
-
     </article>
   );
 }

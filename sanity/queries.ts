@@ -57,6 +57,36 @@ export type About = {
   github?: string;
 };
 
+export type Tag = {
+  title: string;
+  slug: { current: string };
+};
+
+export async function getTagSlugs(): Promise<Tag[]> {
+  return client.fetch(`*[_type == "tag"]{ title, slug }`);
+}
+
+export async function getTag(slug: string): Promise<Tag | null> {
+  return client.fetch(
+    `*[_type == "tag" && slug.current == $slug][0]{ title, slug }`,
+    { slug }
+  );
+}
+
+export async function getPostsByTag(tagSlug: string): Promise<Post[]> {
+  return client.fetch(
+    `*[_type == "post" && references(*[_type == "tag" && slug.current == $tagSlug]._id)] | order(date desc) {
+      _id,
+      title,
+      slug,
+      excerpt,
+      date,
+      tags[]->{ title, slug }
+    }`,
+    { tagSlug }
+  );
+}
+
 export async function getAbout(): Promise<About | null> {
   return client.fetch(
     `*[_type == "about"][0] {
