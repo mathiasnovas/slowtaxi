@@ -1,4 +1,5 @@
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -103,6 +104,7 @@ export default function BlogLayout({
             </div>
           </div>
         </footer>
+        <Analytics />
         <SpeedInsights />
         {process.env.NODE_ENV === "production" &&
           process.env.NEXT_PUBLIC_GA_ID && (
