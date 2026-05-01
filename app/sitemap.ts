@@ -2,7 +2,8 @@ import type { MetadataRoute } from "next";
 import { getPostSlugs } from "@/sanity/queries";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://slowtaxi.com";
+  const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://slowtaxi.vercel.app/";
 
   const posts = await getPostSlugs();
 

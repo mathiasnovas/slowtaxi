@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
-import { Geist_Mono, Geist } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
 
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   },
   description: "Taking the scenic route. A blog by Mathias Novas.",
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://slowtaxi.com"
+    process.env.NEXT_PUBLIC_SITE_URL || "https://slowtaxi.vercel.app/",
   ),
   openGraph: {
     title: "slow taxi",
@@ -57,17 +57,17 @@ export default function BlogLayout({
                 className="text-sm tracking-tight text-taxi-dark inline-flex"
                 style={{ fontFamily: "var(--font-mono)" }}
               >
-                slow&nbsp;<span className="inline-block transition-transform duration-300 ease-out group-hover:translate-x-6 group-hover:duration-[3s] group-hover:ease-linear">taxi</span>
+                slow&nbsp;
+                <span className="inline-block transition-transform duration-300 ease-out group-hover:translate-x-6 group-hover:duration-[3s] group-hover:ease-linear">
+                  taxi
+                </span>
               </span>
             </Link>
             <nav
               className="flex items-center gap-4 text-xs text-taxi-dark/50"
               style={{ fontFamily: "var(--font-mono)" }}
             >
-              <Link
-                href="/"
-                className="hover:text-taxi-dark transition-colors"
-              >
+              <Link href="/" className="hover:text-taxi-dark transition-colors">
                 blog
               </Link>
               <Link
@@ -103,9 +103,10 @@ export default function BlogLayout({
           </div>
         </footer>
       </body>
-      {process.env.NODE_ENV === "production" && process.env.NEXT_PUBLIC_GA_ID && (
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
-      )}
+      {process.env.NODE_ENV === "production" &&
+        process.env.NEXT_PUBLIC_GA_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        )}
     </html>
   );
 }
