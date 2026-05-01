@@ -103,12 +103,12 @@ export default function BlogLayout({
             </div>
           </div>
         </footer>
+        <SpeedInsights />
+        {process.env.NODE_ENV === "production" &&
+          process.env.NEXT_PUBLIC_GA_ID && (
+            <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+          )}
       </body>
-      <SpeedInsights />
-      {process.env.NODE_ENV === "production" &&
-        process.env.NEXT_PUBLIC_GA_ID && (
-          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
-        )}
     </html>
   );
 }
