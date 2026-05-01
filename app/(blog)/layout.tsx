@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist_Mono, Geist } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import Link from "next/link";
 import "./globals.css";
 
@@ -102,6 +103,9 @@ export default function BlogLayout({
           </div>
         </footer>
       </body>
+      {process.env.NODE_ENV === "production" && process.env.NEXT_PUBLIC_GA_ID && (
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+      )}
     </html>
   );
 }
