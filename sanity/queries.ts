@@ -11,6 +11,7 @@ export type Post = {
     };
   };
   date: string;
+  tags?: { title: string; slug: { current: string } }[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   body?: any;
 };
@@ -23,7 +24,8 @@ export async function getPosts(): Promise<Post[]> {
       slug,
       excerpt,
       coverImage,
-      date
+      date,
+      tags[]->{ title, slug }
     }`
   );
 }
@@ -37,6 +39,7 @@ export async function getPost(slug: string): Promise<Post | null> {
       excerpt,
       coverImage,
       date,
+      tags[]->{ title, slug },
       body
     }`,
     { slug }

@@ -19,7 +19,7 @@ export default async function HomePage() {
     <div>
       <section className="mb-12">
         <h1
-          className="text-2xl mb-2 text-taxi-dark font-bold max-w-[50%]"
+          className="text-2xl mb-2 text-taxi-dark font-bold max-w-[75%] sm:max-w-[50%]"
           style={{ fontFamily: "var(--font-mono)" }}
         >
           taking the long route through cyberspace
@@ -54,12 +54,20 @@ export default async function HomePage() {
               className="block group"
             >
               <article>
-                <time
-                  className="text-xs text-taxi-dark/40 mb-1 block"
+                <div
+                  className="flex items-center gap-2 text-xs text-taxi-dark/40 mb-1 flex-wrap"
                   style={{ fontFamily: "var(--font-mono)" }}
                 >
-                  {formatDate(post.date)}
-                </time>
+                  <time>{formatDate(post.date)}</time>
+                  {post.tags && post.tags.length > 0 && (
+                    <>
+                      <span>·</span>
+                      {post.tags.map((tag) => (
+                        <span key={tag.slug.current}>#{tag.title}</span>
+                      ))}
+                    </>
+                  )}
+                </div>
                 <h3
                   className="text-sm mb-1 font-bold group-hover:text-taxi-dark/60 transition-colors"
                   style={{ fontFamily: "var(--font-mono)" }}

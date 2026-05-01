@@ -67,7 +67,7 @@ export default async function AboutPage() {
       </Link>
 
       <h1
-        className="text-2xl leading-snug mb-8 font-bold max-w-[50%]"
+        className="text-2xl leading-snug mb-8 font-bold max-w-[75%] sm:max-w-[50%]"
         style={{ fontFamily: "var(--font-mono)" }}
       >
         About

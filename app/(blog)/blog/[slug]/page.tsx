@@ -131,14 +131,22 @@ export default async function BlogPostPage(
       </Link>
 
       <header className="mb-10">
-        <time
-          className="text-xs text-taxi-dark/40 mb-2 block"
+        <div
+          className="flex items-center gap-2 text-xs text-taxi-dark/40 mb-2 flex-wrap"
           style={{ fontFamily: "var(--font-mono)" }}
         >
-          {formatDate(post.date)}
-        </time>
+          <time>{formatDate(post.date)}</time>
+          {post.tags && post.tags.length > 0 && (
+            <>
+              <span>·</span>
+              {post.tags.map((tag) => (
+                <span key={tag.slug.current}>#{tag.title}</span>
+              ))}
+            </>
+          )}
+        </div>
         <h1
-          className="text-2xl leading-snug mb-3 font-bold max-w-[50%]"
+          className="text-2xl leading-snug mb-3 font-bold max-w-[75%] sm:max-w-[50%]"
           style={{ fontFamily: "var(--font-mono)" }}
         >
           {post.title}

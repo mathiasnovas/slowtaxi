@@ -37,6 +37,12 @@ export const post = defineType({
       initialValue: () => new Date().toISOString(),
     }),
     defineField({
+      name: "tags",
+      title: "Tags",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "tag" }] }],
+    }),
+    defineField({
       name: "body",
       title: "Body",
       type: "array",
